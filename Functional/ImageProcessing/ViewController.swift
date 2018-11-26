@@ -9,6 +9,8 @@ import UIKit
 import Photos
 import AVFoundation
 
+private var myContext = 0
+
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var imageV: UIImageView!
     @IBOutlet weak var scrollV: UIScrollView!
@@ -16,6 +18,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     var currentI: UIImage?
     var optionsB: Array<UIButton> = []
     
+    deinit {
+        self.imageV.removeObserver(self, forKeyPath: "image", context: &myContext)
+    }
     @objc func gaussianBlurAction(sender: UIButton) {
         let image = self.imageV.image!
         let ciImage = (image.ciImage != nil) ? image.ciImage : CIImage(image: image)
@@ -59,23 +64,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.scrollV.contentSize = CGSize(width: W, height: self.scrollV.contentSize.height)
         }
         self.currentI = imageV.image
-        self.imageV.addObserver(self, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: nil)
+        self.imageV.addObserver(self, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: &myContext)
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let _ = keyPath?.elementsEqual("image") {
-            let image = change?[NSKeyValueChangeKey.newKey] as? UIImage
-            if image == nil {
-                self.imageV.backgroundColor = UIColor.white
-                self.resetB.isEnabled = false
-                for button in self.optionsB {
-                    button.isEnabled = false
-                }
-            } else {
-                print("*************\(self.imageV.image!.size)")
-                self.imageV.backgroundColor = UIColor.black
-                self.resetB.isEnabled = !((self.currentI?.isEqual(image))!)
-                for button in self.optionsB {
-                    button.isEnabled = true
+        if context == &myContext {
+            if let _ = keyPath?.elementsEqual("image") {
+                self.resetB.isEnabled = imageV.image!.isEqual(self.currentI) ? false : true
+                if let _ = change?[NSKeyValueChangeKey.newKey] {
+                    print("*************\(self.imageV.image!.size)")
+                    self.imageV.backgroundColor = UIColor.black
+                    for button in self.optionsB {
+                        button.isEnabled = true
+                    }
+                } else {
+                    self.imageV.backgroundColor = UIColor.white
+                    for button in self.optionsB {
+                        button.isEnabled = false
+                    }
                 }
             }
         }
