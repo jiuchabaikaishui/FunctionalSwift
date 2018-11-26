@@ -13,6 +13,7 @@
 		5C4013EE219C1D86003976B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C4013ED219C1D86003976B9 /* Assets.xcassets */; };
 		5C4013F1219C1D86003976B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4013EF219C1D86003976B9 /* LaunchScreen.storyboard */; };
 		5C4013F7219C1DBE003976B9 /* Battpeship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4013F6219C1DBE003976B9 /* Battpeship.swift */; };
+		5CAB617621AB89F1006B3486 /* WechatIMG4.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 5CAB617521AB89F1006B3486 /* WechatIMG4.jpeg */; };
 		5CD783BE21A7AE710056EA10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD783BD21A7AE710056EA10 /* AppDelegate.swift */; };
 		5CD783C021A7AE710056EA10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD783BF21A7AE710056EA10 /* ViewController.swift */; };
 		5CD783C321A7AE720056EA10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CD783C121A7AE720056EA10 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 		5C4013F0219C1D86003976B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5C4013F2219C1D86003976B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C4013F6219C1DBE003976B9 /* Battpeship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Battpeship.swift; sourceTree = "<group>"; };
+		5CAB617521AB89F1006B3486 /* WechatIMG4.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = WechatIMG4.jpeg; sourceTree = "<group>"; };
 		5CD783BB21A7AE710056EA10 /* ImageProcessing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageProcessing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CD783BD21A7AE710056EA10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CD783BF21A7AE710056EA10 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		5CD783BC21A7AE710056EA10 /* ImageProcessing */ = {
 			isa = PBXGroup;
 			children = (
+				5CAB617521AB89F1006B3486 /* WechatIMG4.jpeg */,
 				5CD783CD21A7D72D0056EA10 /* ImageFilter.swift */,
 				5CD783BD21A7AE710056EA10 /* AppDelegate.swift */,
 				5CD783BF21A7AE710056EA10 /* ViewController.swift */,
@@ -192,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CAB617621AB89F1006B3486 /* WechatIMG4.jpeg in Resources */,
 				5CD783C821A7AE800056EA10 /* LaunchScreen.storyboard in Resources */,
 				5CD783C521A7AE800056EA10 /* Assets.xcassets in Resources */,
 				5CD783C321A7AE720056EA10 /* Main.storyboard in Resources */,

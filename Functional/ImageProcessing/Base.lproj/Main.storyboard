@@ -38,11 +38,11 @@
                                 <rect key="frame" x="0.0" y="601" width="375" height="46"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nik-3y-Gxm">
-                                        <rect key="frame" x="8" y="8" width="31" height="30"/>
+                                        <rect key="frame" x="8" y="8" width="62" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="4vc-Ga-moP"/>
+                                            <constraint firstAttribute="width" constant="62" id="6k9-gy-92o"/>
                                         </constraints>
-                                        <state key="normal" title="重置"/>
+                                        <state key="normal" title="清除滤镜"/>
                                         <connections>
                                             <action selector="resetAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NT7-Nk-V7D"/>
                                         </connections>
@@ -55,8 +55,9 @@
                                     <constraint firstAttribute="bottom" secondItem="Nik-3y-Gxm" secondAttribute="bottom" constant="8" id="pxV-at-ElX"/>
                                 </constraints>
                             </scrollView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oza-WB-giB">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WechatIMG4.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="oza-WB-giB">
                                 <rect key="frame" x="0.0" y="64" width="375" height="529"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -89,4 +90,7 @@
             <point key="canvasLocation" x="-508" y="40.929535232383813"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="WechatIMG4.jpeg" width="1079" height="1618"/>
+    </resources>
 </document>
