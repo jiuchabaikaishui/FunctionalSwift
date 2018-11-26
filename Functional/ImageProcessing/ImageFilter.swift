@@ -35,11 +35,7 @@ func colorGenerator(color: CIColor) -> Filter {
         guard let filter = CIFilter(name: "CIConstantColorGenerator", parameters: parameters) else { fatalError() }
         guard let outputImage = filter.outputImage else { fatalError() }
         
-//        print("---------\(image.extent)")
-        let enImage = outputImage.cropped(to: image.extent)
-//        print("---------\(enImage.extent)")
-        
-        return enImage
+        return outputImage.cropped(to: image.extent)
     }
 }
 func compositeSourceOver(overLay: CIImage) -> Filter {

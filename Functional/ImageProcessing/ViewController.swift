@@ -69,14 +69,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == &myContext {
             if let _ = keyPath?.elementsEqual("image") {
-                self.resetB.isEnabled = imageV.image!.isEqual(self.currentI) ? false : true
-                if let _ = change?[NSKeyValueChangeKey.newKey] {
+                if let _ = change?[NSKeyValueChangeKey.newKey] as? UIImage {
                     print("*************\(self.imageV.image!.size)")
+                    self.resetB.isEnabled = !imageV.image!.isEqual(self.currentI)
                     self.imageV.backgroundColor = UIColor.black
                     for button in self.optionsB {
                         button.isEnabled = true
                     }
                 } else {
+                    self.resetB.isEnabled = false
                     self.imageV.backgroundColor = UIColor.white
                     for button in self.optionsB {
                         button.isEnabled = false
