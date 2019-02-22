@@ -47,22 +47,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         
         let arr: [[String: Any]] = [["title": "高斯模糊", "selector": #selector(gaussianBlurAction(sender:))], ["title": "颜色覆盖", "selector": #selector(colorGeneratorAction(sender:))], ["title": "颜色叠加", "selector": #selector(colorOverlayAction(sender:))]]
+        var optionB: UIButton
+        var X: CGFloat = 0
+        var W: CGFloat = 0
+        
         for item in arr {
             let title = item["title"] as! String
             let selector = item["selector"] as! Selector
-            let optionB = UIButton(type: UIButton.ButtonType.system)
+            optionB = UIButton(type: UIButton.ButtonType.system)
             optionB.setTitle(title, for: UIControl.State.normal)
            
             optionB.addTarget(self, action: selector, for: UIControl.Event.touchUpInside)
             let button: UIButton = self.optionsB.count > 0 ? self.optionsB.last! : self.resetB
-            let X = button.frame.origin.x + button.frame.size.width + 8
+            X = button.frame.origin.x + button.frame.size.width + 8
             let strObj = NSString(string: title)
-            let W = strObj.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionB.titleLabel!.font], context: nil).width
+            W = strObj.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionB.titleLabel!.font], context: nil).width
             optionB.frame = CGRect(x: X, y: self.resetB.frame.origin.y, width: W, height: self.resetB.frame.size.height)
             self.scrollV.addSubview(optionB)
             self.optionsB.append(optionB)
-            self.scrollV.contentSize = CGSize(width: W, height: self.scrollV.contentSize.height)
         }
+        self.scrollV.contentSize = CGSize(width: X + W + 8, height: self.scrollV.contentSize.height)
         self.currentI = imageV.image
         self.imageV.addObserver(self, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: &myContext)
     }
@@ -96,7 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let alert: UIAlertController = UIAlertController(title: "选择图片", message: nil, preferredStyle: UIAlertController.Style.actionSheet)
         let cameraA: UIAlertAction = UIAlertAction(title: "相机", style: .default) { _ in
             let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-            if (status == AVAuthorizationStatus.restricted || status == AVAuthorizationStatus.denied) {//收限或拒绝
+            if (status == AVAuthorizationStatus.restricted || status == AVAuthorizationStatus.denied) {//受限或拒绝
                 self.openSetting()
             } else {
                 AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (success) in
