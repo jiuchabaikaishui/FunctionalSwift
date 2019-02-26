@@ -31,9 +31,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let image = self.imageV.image!
         let ciImage = (image.ciImage != nil) ? image.ciImage : CIImage(image: image)
         
-        print("++++++++++++\(self.imageV.image!.size)")
         let endImage = UIImage(ciImage: colorGenerator(color: CIColor(color: UIColor.blue))(ciImage!))
-        print("------------\(endImage.size)")
         
         self.imageV.image = endImage
     }
@@ -43,14 +41,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         self.imageV.image = UIImage(ciImage: colorOverlay(color: CIColor(color: UIColor.green))(ciImage!))
     }
+    @objc func combineAction(sender: UIButton) {
+        let image = self.imageV.image!
+        let ciImage = (image.ciImage != nil) ? image.ciImage : CIImage(image: image)
+        
+        self.imageV.image = UIImage(ciImage: combine()(ciImage!))
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arr: [[String: Any]] = [["title": "高斯模糊", "selector": #selector(gaussianBlurAction(sender:))], ["title": "颜色覆盖", "selector": #selector(colorGeneratorAction(sender:))], ["title": "颜色叠加", "selector": #selector(colorOverlayAction(sender:))]]
+        let arr: [[String: Any]] = [["title": "高斯模糊", "selector": #selector(gaussianBlurAction(sender:))], ["title": "颜色生成", "selector": #selector(colorGeneratorAction(sender:))], ["title": "颜色叠加", "selector": #selector(colorOverlayAction(sender:))], ["title": "合成滤镜", "selector": #selector(combineAction(sender:))]]
         var optionB: UIButton
         var X: CGFloat = 0
         var W: CGFloat = 0
-        
         for item in arr {
             let title = item["title"] as! String
             let selector = item["selector"] as! Selector
@@ -58,15 +61,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             optionB.setTitle(title, for: UIControl.State.normal)
            
             optionB.addTarget(self, action: selector, for: UIControl.Event.touchUpInside)
-            let button: UIButton = self.optionsB.count > 0 ? self.optionsB.last! : self.resetB
-            X = button.frame.origin.x + button.frame.size.width + 8
+            let button: UIButton? = self.optionsB.last
+            X = button == nil ? 8 : button!.frame.origin.x + button!.frame.size.width + 8
             let strObj = NSString(string: title)
             W = strObj.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: optionB.titleLabel!.font], context: nil).width
-            optionB.frame = CGRect(x: X, y: self.resetB.frame.origin.y, width: W, height: self.resetB.frame.size.height)
+            optionB.frame = CGRect(x: X, y: 8, width: W, height: self.resetB.frame.size.height)
             self.scrollV.addSubview(optionB)
             self.optionsB.append(optionB)
         }
-        self.scrollV.contentSize = CGSize(width: X + W + 8, height: self.scrollV.contentSize.height)
+        self.scrollV.contentSize = CGSize(width: X + W + 8, height: self.scrollV.frame.size.height)
         self.currentI = imageV.image
         self.imageV.addObserver(self, forKeyPath: "image", options: NSKeyValueObservingOptions.new, context: &myContext)
     }
@@ -75,10 +78,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let _ = keyPath?.elementsEqual("image") {
                 if let _ = change?[NSKeyValueChangeKey.newKey] as? UIImage {
                     print("*************\(self.imageV.image!.size)")
-                    self.resetB.isEnabled = !imageV.image!.isEqual(self.currentI)
                     self.imageV.backgroundColor = UIColor.black
+                    let equal = imageV.image!.isEqual(self.currentI)
+                    self.resetB.isEnabled = !equal
                     for button in self.optionsB {
-                        button.isEnabled = true
+                        button.isEnabled = equal
                     }
                 } else {
                     self.resetB.isEnabled = false

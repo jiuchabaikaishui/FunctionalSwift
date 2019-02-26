@@ -68,7 +68,7 @@ func colorOverlay(color: CIColor) -> Filter {
 /// 组合滤镜
 func combine() -> Filter {
     let radius = 5.0
-    let color = UIColor.red.ciColor
+    let color = CIColor(color: UIColor.red)
     ///方案一：将滤镜应用于图像
 //    return { image in
 //        let blurredImage = gaussianBlur(radius: radius)(image)
@@ -147,7 +147,7 @@ func colorOverlay1(color: CIColor) -> Filter1 {
     })
 }
 /// 组合滤镜
-func combine() -> Filter1 {
+func combine1() -> Filter1 {
     let radius: CGFloat = 5.0
     let color = UIColor.red.ciColor
     ///方案一：将滤镜应用于图像
