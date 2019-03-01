@@ -1,11 +1,14 @@
 //
-//  ViewController.swift
+//  main.swift
 //  MapFilterReduce
 //
-//  Created by 綦帅鹏 on 2019/2/28.
+//  Created by 綦帅鹏 on 2019/3/1.
 //
 
-import UIKit
+import Foundation
+
+let array = [1, 2, 3, 4, 5]
+print("原始数据：\(array)")
 
 func incrementArray(array: [Int]) -> [Int] {
     var result: Array<Int> = []
@@ -15,6 +18,8 @@ func incrementArray(array: [Int]) -> [Int] {
     
     return result
 }
+print("incrementArray：\(incrementArray(array: array))")
+
 func doubleArray(array: [Int]) -> [Int] {
     var result: [Int] = []
     for i in array {
@@ -23,6 +28,8 @@ func doubleArray(array: [Int]) -> [Int] {
     
     return result;
 }
+print("doubleArray：\(doubleArray(array: array))")
+
 func computeIntArray(array: [Int], transform: (Int) -> Int) -> [Int] {
     var result: [Int] = []
     for i in array {
@@ -31,12 +38,15 @@ func computeIntArray(array: [Int], transform: (Int) -> Int) -> [Int] {
     
     return result
 }
+
 func incrementArray1(array: [Int]) -> [Int] {
     return computeIntArray(array: array, transform: { x in x + 1 })
 }
 func doubleArray1(array: [Int]) -> [Int] {
     return computeIntArray(array: array, transform: { x in x*2 })
 }
+print("incrementArray1：\(incrementArray1(array: array))")
+print("doubleArray1：\(doubleArray1(array: array))")
 //func isEvenArray(array: [Int] -> [Bool]) {
 //    return computeIntArray(array: array, transform: { x in x%2 == 0 })
 //}
@@ -92,6 +102,9 @@ func productUsingReduce(xs: [Int]) -> Int {
 func concatUsingReduce(xs: [String]) -> String {
     return xs.reduce(initial: "", combine: +)
 }
+print("sumUsingReduce：\(sumUsingReduce(xs: array))")
+print("productUsingReduce：\(productUsingReduce(xs: array))")
+print("concatUsingReduce：\(concatUsingReduce(xs: array.map(transform: { i in "\(i)" })))")
 
 extension Array {
     func mapUsingReduce<T>(transform: (Element) -> T) -> [T] {
@@ -117,21 +130,22 @@ extension City {
     func cityByScalingPopulation() -> City { return City(name: self.name, population: self.population*10000) }
 }
 
-let table = citys.filter(includeElement: { city in city.population >= 3000 }).map(transform: { city in city.cityByScalingPopulation() }).reduce(initial: "\n城市：人口\n", combine: { result, city in result + "\n\(city.name)：\(city.population)\n"})
+let table = citys.filter(includeElement: { city in city.population >= 3000 }).map(transform: { city in city.cityByScalingPopulation() }).reduce(initial: "\n城市：人口\n", combine: { result, city in result + "\(city.name)：\(city.population)\n"})
+print(table)
 
 func noOp<T>(x: T) -> T { return x }
 func noOpAny(x: Any) -> Any { return x }
-func noOpAnyWrong(x: Any) -> Any { return 0 }
+//func noOpWrong<T>(x: T) -> T { return 0 }
+//func noOpAnyWrong(x: Any) -> Any { return 0 }
 
-
-
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-
+precedencegroup ComposeFunctionPrecedence {
+    associativity: left
+}
+infix operator >>>: ComposeFunctionPrecedence
+func >>><A, B, C>(f: @escaping (A) -> B, g: @escaping (B) -> C) -> (A) -> C {
+    return { x in g(f(x)) }
 }
 
+func curry<A, B, C>(f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+    return { x in return { y in f(x, y) } }
+}

@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C3F4D7D2227895500527088 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F4D7C2227895500527088 /* AppDelegate.swift */; };
-		5C3F4D7F2227895500527088 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F4D7E2227895500527088 /* ViewController.swift */; };
-		5C3F4D822227895500527088 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F4D802227895500527088 /* Main.storyboard */; };
-		5C3F4D842227896700527088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F4D832227896700527088 /* Assets.xcassets */; };
-		5C3F4D872227896800527088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C3F4D852227896700527088 /* LaunchScreen.storyboard */; };
+		5C3F4D932228CC5D00527088 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3F4D922228CC5D00527088 /* main.swift */; };
 		5C4013E7219C1D7B003976B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4013E6219C1D7B003976B9 /* AppDelegate.swift */; };
 		5C4013E9219C1D7B003976B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4013E8219C1D7B003976B9 /* ViewController.swift */; };
 		5C4013EC219C1D7B003976B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C4013EA219C1D7B003976B9 /* Main.storyboard */; };
@@ -27,14 +23,21 @@
 		5CD783CE21A7D72D0056EA10 /* ImageFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD783CD21A7D72D0056EA10 /* ImageFilter.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5C3F4D8E2228CC5D00527088 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		5C3F4D7A2227895400527088 /* MapFilterReduce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapFilterReduce.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C3F4D7C2227895500527088 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5C3F4D7E2227895500527088 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		5C3F4D812227895500527088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5C3F4D832227896700527088 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5C3F4D862227896700527088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5C3F4D882227896800527088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C3F4D902228CC5D00527088 /* MapFilterReduce */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MapFilterReduce; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C3F4D922228CC5D00527088 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5C4013E4219C1D7B003976B9 /* Battleship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Battleship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C4013E6219C1D7B003976B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C4013E8219C1D7B003976B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,7 +58,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5C3F4D772227895400527088 /* Frameworks */ = {
+		5C3F4D8D2228CC5D00527088 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -79,15 +82,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5C3F4D7B2227895500527088 /* MapFilterReduce */ = {
+		5C3F4D912228CC5D00527088 /* MapFilterReduce */ = {
 			isa = PBXGroup;
 			children = (
-				5C3F4D7C2227895500527088 /* AppDelegate.swift */,
-				5C3F4D7E2227895500527088 /* ViewController.swift */,
-				5C3F4D802227895500527088 /* Main.storyboard */,
-				5C3F4D832227896700527088 /* Assets.xcassets */,
-				5C3F4D852227896700527088 /* LaunchScreen.storyboard */,
-				5C3F4D882227896800527088 /* Info.plist */,
+				5C3F4D922228CC5D00527088 /* main.swift */,
 			);
 			path = MapFilterReduce;
 			sourceTree = "<group>";
@@ -97,7 +95,7 @@
 			children = (
 				5C4013E5219C1D7B003976B9 /* Battleship */,
 				5CD783BC21A7AE710056EA10 /* ImageProcessing */,
-				5C3F4D7B2227895500527088 /* MapFilterReduce */,
+				5C3F4D912228CC5D00527088 /* MapFilterReduce */,
 				5C4013CE219C09E9003976B9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,7 +105,7 @@
 			children = (
 				5C4013E4219C1D7B003976B9 /* Battleship.app */,
 				5CD783BB21A7AE710056EA10 /* ImageProcessing.app */,
-				5C3F4D7A2227895400527088 /* MapFilterReduce.app */,
+				5C3F4D902228CC5D00527088 /* MapFilterReduce */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,13 +142,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5C3F4D792227895400527088 /* MapFilterReduce */ = {
+		5C3F4D8F2228CC5D00527088 /* MapFilterReduce */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5C3F4D8B2227896800527088 /* Build configuration list for PBXNativeTarget "MapFilterReduce" */;
+			buildConfigurationList = 5C3F4D942228CC5D00527088 /* Build configuration list for PBXNativeTarget "MapFilterReduce" */;
 			buildPhases = (
-				5C3F4D762227895400527088 /* Sources */,
-				5C3F4D772227895400527088 /* Frameworks */,
-				5C3F4D782227895400527088 /* Resources */,
+				5C3F4D8C2228CC5D00527088 /* Sources */,
+				5C3F4D8D2228CC5D00527088 /* Frameworks */,
+				5C3F4D8E2228CC5D00527088 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -158,8 +156,8 @@
 			);
 			name = MapFilterReduce;
 			productName = MapFilterReduce;
-			productReference = 5C3F4D7A2227895400527088 /* MapFilterReduce.app */;
-			productType = "com.apple.product-type.application";
+			productReference = 5C3F4D902228CC5D00527088 /* MapFilterReduce */;
+			productType = "com.apple.product-type.tool";
 		};
 		5C4013E3219C1D7B003976B9 /* Battleship */ = {
 			isa = PBXNativeTarget;
@@ -204,7 +202,7 @@
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				TargetAttributes = {
-					5C3F4D792227895400527088 = {
+					5C3F4D8F2228CC5D00527088 = {
 						CreatedOnToolsVersion = 10.1;
 					};
 					5C4013E3219C1D7B003976B9 = {
@@ -230,22 +228,12 @@
 			targets = (
 				5C4013E3219C1D7B003976B9 /* Battleship */,
 				5CD783BA21A7AE710056EA10 /* ImageProcessing */,
-				5C3F4D792227895400527088 /* MapFilterReduce */,
+				5C3F4D8F2228CC5D00527088 /* MapFilterReduce */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5C3F4D782227895400527088 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5C3F4D872227896800527088 /* LaunchScreen.storyboard in Resources */,
-				5C3F4D842227896700527088 /* Assets.xcassets in Resources */,
-				5C3F4D822227895500527088 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5C4013E2219C1D7B003976B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,12 +258,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5C3F4D762227895400527088 /* Sources */ = {
+		5C3F4D8C2228CC5D00527088 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C3F4D7F2227895500527088 /* ViewController.swift in Sources */,
-				5C3F4D7D2227895500527088 /* AppDelegate.swift in Sources */,
+				5C3F4D932228CC5D00527088 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,22 +289,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5C3F4D802227895500527088 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5C3F4D812227895500527088 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		5C3F4D852227896700527088 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5C3F4D862227896700527088 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		5C4013EA219C1D7B003976B9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -353,11 +324,10 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5C3F4D892227896800527088 /* Debug */ = {
+		5C3F4D952228CC5D00527088 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -386,7 +356,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -406,30 +376,22 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = MapFilterReduce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iapppay.MapFilterReduce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		5C3F4D8A2227896800527088 /* Release */ = {
+		5C3F4D962228CC5D00527088 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -458,7 +420,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -472,22 +434,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = MapFilterReduce/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.iapppay.MapFilterReduce;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -784,11 +738,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5C3F4D8B2227896800527088 /* Build configuration list for PBXNativeTarget "MapFilterReduce" */ = {
+		5C3F4D942228CC5D00527088 /* Build configuration list for PBXNativeTarget "MapFilterReduce" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5C3F4D892227896800527088 /* Debug */,
-				5C3F4D8A2227896800527088 /* Release */,
+				5C3F4D952228CC5D00527088 /* Debug */,
+				5C3F4D962228CC5D00527088 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
