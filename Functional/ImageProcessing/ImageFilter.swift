@@ -82,7 +82,7 @@ func combine() -> Filter {
 //        return colorOverlay(color: color)(gaussianBlur(radius: radius)(image))
 //    }
     
-    ///方案三：使用符合函数合并两个滤镜
+    ///方案三：使用复合函数合并两个滤镜
     return composeFilters(filter1: gaussianBlur(radius: radius), filter2: colorOverlay(color: color))
     
     ///方案四：使用运算符组合两个滤镜
