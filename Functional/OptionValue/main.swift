@@ -181,12 +181,3 @@ func addOptionals2(optionalX: Int?, optionalY: Int?) -> Int? {
         }
     }
 }
-
-var value = 1.0
-for _ in 0..<200 {
-    value = value*1.02
-}
-print(value)
-
-
-
