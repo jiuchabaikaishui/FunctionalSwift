@@ -48,12 +48,16 @@ extension BinarySearchTree {
 }
 
 extension BinarySearchTree {
-    func recuce<A>(initialResult: A, nextPartialResult: (A, Element, A) -> A) -> A {
+    func recuce<A>(initialResult: A, nextNodeResult: (A, Element, A) -> A, nextLeafResult: (A, BinarySearchTree) -> A) -> A {
         switch self {
         case .leaf:
-            return initialResult
+            return nextLeafResult(initialResult, self)
         case let .node(left, value, right):
-            return nextPartialResult(left.recuce(initialResult: initialResult, nextPartialResult: nextPartialResult), value, right.recuce(initialResult: initialResult, nextPartialResult: nextPartialResult))
+            return nextNodeResult(left.recuce(initialResult: initialResult, nextNodeResult: nextNodeResult, nextLeafResult: nextLeafResult), value, right.recuce(initialResult: initialResult, nextNodeResult: nextNodeResult, nextLeafResult: nextLeafResult))
+//            return nextNodeResult(left.recuce(initialResult: initialResult, nextPartialResult: nextNodeResult), value, right.recuce(initialResult: initialResult, nextPartialResult: nextNodeResult), nextLeafResult: nextLeafResult)
         }
+    }
+    func reduce1<A>(initalResult: A, nextPartialResult: (A, BinarySearchTree) -> A) -> A {
+        return nextPartialResult(initalResult, self)
     }
 }
