@@ -121,6 +121,6 @@ extension BinarySearchTree {
 var tree = BinarySearchTree(value: 10)
 var tree1 = tree
 tree1.insert(value: 8)
-print(tree.elements)
-print(tree1.elements)
+print(tree.elements) // [10]
+print(tree1.elements) // [10, 8]
 
