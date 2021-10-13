@@ -124,3 +124,86 @@ tree1.insert(value: 8)
 print(tree.elements) // [10]
 print(tree1.elements) // [10, 8]
 
+
+extension String {
+    func complete(history: [String]) -> [String] {
+        history.filter { $0.hasPrefix(self) }
+    }
+}
+
+struct Trie<Element: Hashable> {
+    var isElement: Bool
+    var children: [Element: Trie<Element>]
+}
+
+extension Trie {
+    init() {
+        isElement = false
+        children = [:]
+    }
+}
+
+extension Trie {
+    var elements: [[Element]] {
+        var result: [[Element]] = isElement ? [[]] : []
+        for (key, value) in children {
+            result += value.elements.map { [key] + $0 }
+        }
+        
+        return result
+    }
+}
+
+extension Array {
+    var slice: ArraySlice<Element> {
+        ArraySlice(self)
+    }
+}
+
+extension ArraySlice {
+    var decomposed: (Element, ArraySlice<Element>)? {
+        isEmpty ? nil : (first!, dropFirst())
+    }
+}
+
+func sum(integers: ArraySlice<Int>) -> Int {
+    guard let (head, tail) = integers.decomposed else {
+        return 0
+    }
+    return head + sum(integers: tail)
+}
+
+print(sum(integers: Array(1...100).slice))
+
+
+extension Trie {
+    func lookup(key: ArraySlice<Element>) -> Bool {
+        guard let (head, tail) = key.decomposed else { return isElement }
+        guard let sub = children[head] else { return false }
+        
+        return sub.lookup(key: tail)
+    }
+}
+
+extension Trie {
+    func lookup1(key: ArraySlice<Element>) -> Trie<Element>? {
+        guard let (head, tail) = key.decomposed else { return self }
+        guard let sub = children[head] else { return nil }
+        
+        return sub.lookup1(key: tail)
+    }
+}
+
+extension Trie {
+    func complete(key: ArraySlice<Element>) -> [[Element]] { lookup1(key: key)?.elements ?? [] }
+}
+
+extension Trie {
+    init(_ key: ArraySlice<Element>) {
+        if let (head, tail) = key.decomposed {
+            self = Trie(isElement: false, children: [head: Trie(tail)])
+        } else {
+            self = Trie(isElement: true, children: [:])
+        }
+    }
+}
