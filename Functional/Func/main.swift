@@ -207,3 +207,20 @@ extension Trie {
         }
     }
 }
+
+extension Trie {
+    func inserting(_ key: ArraySlice<Element>) -> Trie<Element> {
+        guard let (head, tail) = key.decomposed else {
+            return Trie(isElement: true, children: children)
+        }
+        
+        var newChildren = children
+        if let trie = children[head] {
+            newChildren[head] = trie.inserting(tail)
+        } else {
+            newChildren[head] = Trie(tail)
+        }
+        
+        return Trie(isElement: isElement, children: newChildren)
+    }
+}
