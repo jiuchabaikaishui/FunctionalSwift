@@ -70,7 +70,7 @@ extension BinarySearchTree {
         case .leaf:
             return true
         case let .node(left, value, right):
-            return left.isBST && right.isBST && left.elements.reduce(false, { $0 && $1 < value }) && right.elements.reduce(false, { $0 && $1 > value })
+            return left.isBST && right.isBST && left.elements.all{ $0 < value } && right.elements.all{ $0 > value }
         }
     }
     
@@ -115,6 +115,15 @@ extension BinarySearchTree {
             }
             self = .node(left, myValue, right)
         }
+    }
+}
+
+extension Sequence {
+    func all(predicate: (Element) -> Bool) -> Bool {
+        for item in self where !predicate(item) {
+            return false
+        }
+        return true
     }
 }
 
