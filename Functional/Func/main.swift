@@ -161,7 +161,21 @@ extension Trie {
         
         return result
     }
+    
+    var elements1: [[Element]] {
+        var result: [[Element]] = isElement ? [[]] : []
+        result += children.flatMap { (item) in
+            return item.value.elements.map { [item.key] + $0 }
+        }
+        
+        return result
+    }
 }
+
+let rTrie = Trie(isElement: false, children: ["e": Trie(isElement: true, children: [:])])
+var trie = Trie(isElement: false, children: ["a": Trie(isElement: true, children: ["m": Trie(isElement: true, children: [:]), "r": rTrie]), "b": Trie(), "c": Trie()])
+print("----\(trie.elements)----")
+print("----\(trie.elements1)----")
 
 extension Array {
     var slice: ArraySlice<Element> {
