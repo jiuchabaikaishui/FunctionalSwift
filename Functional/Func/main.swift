@@ -176,6 +176,10 @@ let rTrie = Trie(isElement: false, children: ["e": Trie(isElement: true, childre
 var trie = Trie(isElement: false, children: ["a": Trie(isElement: true, children: ["m": Trie(isElement: true, children: [:]), "r": rTrie]), "b": Trie(), "c": Trie()])
 print("----\(trie.elements)----")
 print("----\(trie.elements1)----")
+/*输出：
+ ----[["a"], ["a", "m"], ["a", "r", "e"]]----
+ ----[["a"], ["a", "m"], ["a", "r", "e"]]----
+ */
 
 extension Array {
     var slice: ArraySlice<Element> {
@@ -197,7 +201,7 @@ func sum(integers: ArraySlice<Int>) -> Int {
 }
 
 print(sum(integers: Array(1...100).slice))
-
+/*输出：5050*/
 
 extension Trie {
     func lookup(key: ArraySlice<Element>) -> Bool {
@@ -207,6 +211,9 @@ extension Trie {
         return sub.lookup(key: tail)
     }
 }
+
+print("----\(trie.lookup(key: ["a", "r", "e"].slice))----")
+/*输出：----true----*/
 
 extension Trie {
     func lookup1(key: ArraySlice<Element>) -> Trie<Element>? {
@@ -245,5 +252,34 @@ extension Trie {
         }
         
         return Trie(isElement: isElement, children: newChildren)
+    }
+    mutating func inserting1(_ key: ArraySlice<Element>) {
+        guard let (head, tail) = key.decomposed else {
+            isElement = true
+            return
+        }
+        
+        if var trie = children[head] {
+            trie.inserting1(tail)
+        } else {
+            children[head] = Trie(tail)
+        }
+    }
+}
+
+var iTrie = trie.inserting(["a", "r", "g", "u", "m", "e", "n", "t"].slice)
+iTrie.inserting1(["a", "p", "p", "l", "e"].slice)
+print("----\(iTrie.elements)----")
+/*输出：----[["a"], ["a", "r", "g", "u", "m", "e", "n", "t"], ["a", "r", "e"], ["a", "m"]]----*/
+
+let string = "abc"
+
+extension Trie where Element == Character {
+    static func build(words: [String]) -> Trie {
+        var trie = Trie()
+        words.reduce(trie) { (result, word) in
+            Array(
+            result.inserting(Array()
+        }
     }
 }
