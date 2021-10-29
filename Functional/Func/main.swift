@@ -272,14 +272,25 @@ iTrie.inserting1(["a", "p", "p", "l", "e"].slice)
 print("----\(iTrie.elements)----")
 /*输出：----[["a"], ["a", "r", "g", "u", "m", "e", "n", "t"], ["a", "r", "e"], ["a", "m"]]----*/
 
-let string = "abc"
-
 extension Trie where Element == Character {
     static func build(words: [String]) -> Trie {
-        var trie = Trie()
-        words.reduce(trie) { (result, word) in
-            Array(
-            result.inserting(Array()
+        return words.reduce(Trie()) { (result, word) in
+            return result.inserting(Array(word).slice)
         }
     }
 }
+
+extension String {
+    func compelte(knownword: Trie<Character>) -> [String] {
+        knownword.complete(key: Array(self).slice).map { self + String($0) }
+    }
+}
+
+let content =  ["cat", "car", "cart", "dog", "你", "你好", "你好吗"]
+let wordsT = Trie.build(words: content)
+print("----\("c".compelte(knownword: wordsT))----")
+/*输出：----["cat", "car", "cart"]----*/
+print("----\("你好".compelte(knownword: wordsT))----")
+/*输出：----["你好", "你好吗"]----*/
+
+
