@@ -12,6 +12,38 @@ struct CellModel {
     let image: UIImage?
 }
 
+enum Primitive {
+    case ellipse
+    case rectangle
+    case text(String)
+}
+
+indirect enum Diagram {
+    case primitive(CGSize, Primitive)
+    case beside(Diagram, Diagram)
+    case below(Diagram, Diagram)
+    case align(CGPoint, Diagram)
+}
+
+enum Attribute {
+    case fillColor(UIColor)
+}
+
+extension Diagram {
+    var size: CGSize {
+        switch self {
+        case let .primitive(size, _):
+            return size
+        case let .beside(left, right):
+            return CGSize(width: left.size.width + right.size.width, height: max(left.size.height, right.size.height))
+        case let .below(top, bottom):
+            return CGSize(width: max(top.size.width, bottom.size.width), height: top.size.height + bottom.size.height)
+        case let .align(_, diagram):
+            return diagram.size
+        }
+    }
+}
+
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     lazy var datas = Array<CellModel>()
     lazy var tableView = { () -> UITableView in
@@ -37,18 +69,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         view.addSubview(tableView)
     }
     func buildData() {
+        datas.append(CellModel(title: "绘制正方形和圆", image: drawSC()))
+        datas.append(CellModel(title: "加一个圆", image: addC()))
+        datas.append(CellModel(title: "xx", image: nil))
+    }
+    
+    func drawSC() -> UIImage {
         let bound = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 40.0)
         let renderner = UIGraphicsImageRenderer(bounds: bound)
-        let image = renderner.image { (context) in
-            UIColor.red.setFill()
-            context.fill(CGRect(x: 0.0, y: 10.0, width: 20.0, height: 20.0))
-            UIColor.green.setFill()
-            context.fill(CGRect(x: 20.0, y: 0.0, width: 40.0, height: 40.0))
+        return renderner.image { (context) in
             UIColor.blue.setFill()
+            context.fill(CGRect(x: 0.0, y: 10.0, width: 20.0, height: 20.0))
+            UIColor.red.setFill()
+            context.fill(CGRect(x: 20.0, y: 0.0, width: 40.0, height: 40.0))
+            UIColor.green.setFill()
             context.cgContext.fillEllipse(in: CGRect(x: 60.0, y: 10.0, width: 20.0, height: 20.0))
         }
-        self.datas.append(CellModel(title: "绘制正方形和圆", image: image))
-        datas.append(CellModel(title: "xx", image: nil))
+    }
+    func addC() -> UIImage {
+        let bound = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 40.0)
+        let renderner = UIGraphicsImageRenderer(bounds: bound)
+        return renderner.image { (context) in
+            UIColor.blue.setFill()
+            context.fill(CGRect(x: 0.0, y: 10.0, width: 20.0, height: 20.0))
+            UIColor.cyan.setFill()
+            context.cgContext.fillEllipse(in: CGRect(x: 20.0, y: 10.0, width: 20.0, height: 20.0))
+            UIColor.red.setFill()
+            context.fill(CGRect(x: 40.0, y: 0.0, width: 40.0, height: 40.0))
+            UIColor.green.setFill()
+            context.cgContext.fillEllipse(in: CGRect(x: 80.0, y: 10.0, width: 20.0, height: 20.0))
+        }
     }
     
     
