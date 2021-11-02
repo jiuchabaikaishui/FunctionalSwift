@@ -294,3 +294,8 @@ print("----\("你好".compelte(knownword: wordsT))----")
 /*输出：----["你好", "你好吗"]----*/
 
 
+let text = "你是猪"
+print(text.unicodeScalars)
+for c in text.unicodeScalars {
+    print(c.utf8.enumerated())
+}

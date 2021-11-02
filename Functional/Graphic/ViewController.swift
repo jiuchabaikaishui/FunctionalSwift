@@ -18,15 +18,16 @@ enum Primitive {
     case text(String)
 }
 
+enum Attribute {
+    case fillColor(UIColor)
+}
+
 indirect enum Diagram {
     case primitive(CGSize, Primitive)
     case beside(Diagram, Diagram)
     case below(Diagram, Diagram)
+    case attributed(Attribute, Diagram)
     case align(CGPoint, Diagram)
-}
-
-enum Attribute {
-    case fillColor(UIColor)
 }
 
 extension Diagram {
@@ -38,9 +39,49 @@ extension Diagram {
             return CGSize(width: left.size.width + right.size.width, height: max(left.size.height, right.size.height))
         case let .below(top, bottom):
             return CGSize(width: max(top.size.width, bottom.size.width), height: top.size.height + bottom.size.height)
+        case let .attributed(_, diagram):
+            return diagram.size
         case let .align(_, diagram):
             return diagram.size
         }
+    }
+}
+
+func *(l: CGFloat, r: CGSize) -> CGSize {
+    return CGSize(width: l*r.width, height: l*r.height)
+}
+func *(l: CGSize, r: CGSize) -> CGSize {
+    return CGSize(width: l.width*r.width, height: l.height*r.height)
+}
+func -(l: CGSize, r: CGSize) -> CGSize {
+    return CGSize(width: l.width - r.width, height: l.height - r.height)
+}
+func +(l: CGPoint, r: CGPoint) -> CGPoint {
+    return CGPoint(x: l.x + r.x, y: l.y + r.y)
+}
+extension CGSize {
+    var point: CGPoint {
+        return CGPoint(x: width, y: height)
+    }
+}
+extension CGPoint {
+    var size: CGSize {
+        return CGSize(width: x, height: y)
+    }
+}
+
+extension CGSize {
+    func fit(into rect: CGRect, alignment: CGPoint) -> CGRect {
+        let scale = min(width/rect.size.width, height/rect.size.height)
+        let targetSize = scale*self
+        let spacerSize = alignment*(rect.size - targetSize)
+        return CGRect(origin: rect.origin + spacerSize.point, size: targetSize)
+    }
+}
+
+extension CGContext {
+    func draw(_ primitive: Primitive, in frame: CGRect) {
+        <#function body#>
     }
 }
 
