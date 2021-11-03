@@ -74,14 +74,60 @@ extension CGSize {
     func fit(into rect: CGRect, alignment: CGPoint) -> CGRect {
         let scale = min(width/rect.size.width, height/rect.size.height)
         let targetSize = scale*self
-        let spacerSize = alignment*(rect.size - targetSize)
+        let spacerSize = alignment.size*(rect.size - targetSize)
         return CGRect(origin: rect.origin + spacerSize.point, size: targetSize)
+    }
+}
+
+extension CGPoint {
+    static let left = CGPoint(x: 0.0, y: 0.5)
+    static let top = CGPoint(x: 0.5, y: 0.0)
+    static let right = CGPoint(x: 1.0, y: 0.5)
+    static let bottom = CGPoint(x: 0.5, y: 1.0)
+    static let center = CGPoint(x: 0.5, y: 0.5)
+}
+
+extension CGRectEdge {
+    var isHorizontal: Bool {
+        return self == .maxXEdge || self == .minXEdge
+    }
+}
+
+extension CGRect {
+    func split(ratio: CGFloat, edge: CGRectEdge) -> (CGRect, CGRect) {
+        let length = edge.isHorizontal ? width : height
+        return divided(atDistance: length*ratio, from: edge)
     }
 }
 
 extension CGContext {
     func draw(_ primitive: Primitive, in frame: CGRect) {
-        <#function body#>
+        switch primitive {
+        case .rectangle:
+            fill(frame)
+        case .ellipse:
+            fillEllipse(in: frame)
+        case .text(let text):
+            let attributeText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+            attributeText.draw(in: frame)
+        }
+    }
+    
+    func draw(_ diagram: Diagram, in bound: CGRect) {
+        switch diagram {
+        case let .primitive(size, primiteve):
+            let frame = size.fit(into: bound, alignment: .center)
+            draw(primiteve, in: frame)
+        case let .align(alignment, diagram):
+            let frame = diagram.size.fit(into: bound, alignment: alignment)
+            draw(diagram, in: frame)
+        case let .beside(left, right):
+            let radio = left.size.width/right.size.width
+            let (leftBound, rightBound) = bound.split(ratio: radio, edge: .minXEdge)
+            
+        default:
+            <#code#>
+        }
     }
 }
 
