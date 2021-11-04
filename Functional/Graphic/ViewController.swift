@@ -7,11 +7,6 @@
 
 import UIKit
 
-struct CellModel {
-    let title: String?
-    let image: UIImage?
-}
-
 enum Primitive {
     case ellipse
     case rectangle
@@ -124,12 +119,96 @@ extension CGContext {
         case let .beside(left, right):
             let radio = left.size.width/right.size.width
             let (leftBound, rightBound) = bound.split(ratio: radio, edge: .minXEdge)
-            
-        default:
-            <#code#>
+            draw(left, in: leftBound)
+            draw(right, in: rightBound)
+        case let .below(top, down):
+            let radio = top.size.width/down.size.width
+            let (topBound, downBound) = bound.split(ratio: radio, edge: .minYEdge)
+            draw(top, in: topBound)
+            draw(down, in: downBound)
+        case let .attributed(.fillColor(color), diagram):
+            saveGState()
+            color.setFill()
+            draw(diagram, in: bound)
+            restoreGState()
         }
     }
 }
+
+func rect(width: CGFloat, height: CGFloat) -> Diagram {
+    return Diagram.primitive(CGSize(width: width, height: height), .rectangle)
+}
+func circle(diameter: CGFloat) -> Diagram {
+    return Diagram.primitive(CGSize(width: diameter, height: diameter), .ellipse)
+}
+func text(content: String, width: CGFloat, height: CGFloat) -> Diagram {
+    return Diagram.primitive(CGSize(width: width, height: height), .text(content))
+}
+func square(side: CGFloat) -> Diagram {
+    return rect(width: side, height: side)
+}
+
+precedencegroup VerticalCombination {
+    associativity: left
+}
+infix operator --- : VerticalCombination
+func ---(top: Diagram, bottom: Diagram) -> Diagram {
+    return Diagram.below(top, bottom)
+}
+
+precedencegroup HorizontalCombination {
+    higherThan: VerticalCombination
+    associativity: left
+}
+infix operator ||| : AdditionPrecedence
+func |||(left: Diagram, right: Diagram) -> Diagram {
+    return Diagram.beside(left, right)
+}
+
+extension Diagram {
+    func filled(color: UIColor) -> Diagram {
+        return Diagram.attributed(.fillColor(color), self)
+    }
+    func aligned(position: CGPoint) -> Diagram {
+        return Diagram.align(position, self)
+    }
+}
+
+extension Diagram {
+    init() {
+        self = rect(width: 0.0, height: 0.0)
+    }
+}
+extension Sequence where Element == Diagram {
+    var hcat: Diagram {
+        return reduce(Diagram(), |||)
+    }
+}
+
+extension Sequence where Element == CGFloat {
+    var normalized: [CGFloat] {
+        let maxValue = reduce(0.0, Swift.max)
+        return map { $0/maxValue }
+    }
+}
+
+func barGraph(input: [(String, Float)]) -> Diagram {
+    let values = input.map { CGFloat($0.1) }
+    let bars = values.normalized.map { (v) in
+        return rect(width: 1.0, height: 3.0*v).filled(color: UIColor.black).aligned(position: CGPoint.bottom)
+    }.hcat
+    let labels = input.map { (label, _) in
+        return text(content: label, width: 1.0, height: 1.0).filled(color: UIColor.black)
+    }.hcat
+    
+    return bars --- labels
+}
+
+struct CellModel {
+    let title: String?
+    let image: UIImage?
+}
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     lazy var datas = Array<CellModel>()
@@ -158,9 +237,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func buildData() {
         datas.append(CellModel(title: "绘制正方形和圆", image: drawSC()))
         datas.append(CellModel(title: "加一个圆", image: addC()))
+        datas.append(CellModel(title: "画个圆", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
+            context.draw(circle(diameter: bound.width).filled(color: UIColor.red), in: bound)
+        })))
+        datas.append(CellModel(title: "画个正方形", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
+            context.draw(square(side: bound.width).filled(color: UIColor.yellow), in: bound)
+        })))
+        datas.append(CellModel(title: "画个文字", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
+            context.draw(text(content: "画个文字", width: bound.width, height: bound.height).filled(color: UIColor.orange).aligned(position: .center), in: bound)
+        })))
+        datas.append(CellModel(title: "画两个矩形", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            let left = rect(width: 50.0, height: 20.0).filled(color: UIColor.blue).aligned(position: .bottom)
+            let right = rect(width: 50.0, height: 30.0).filled(color: UIColor.purple).aligned(position: .bottom)
+            context.draw(left ||| right, in: bound)
+        })))
         datas.append(CellModel(title: "xx", image: nil))
     }
     
+    func image(in size: CGSize, draw: (CGContext, CGRect) -> Void) -> UIImage {
+        let bound = CGRect(origin: CGPoint.zero, size: size)
+        let renderner = UIGraphicsImageRenderer(bounds: bound)
+        return renderner.image { draw($0.cgContext, bound) }
+    }
     func drawSC() -> UIImage {
         let bound = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 40.0)
         let renderner = UIGraphicsImageRenderer(bounds: bound)
@@ -185,6 +283,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             context.fill(CGRect(x: 40.0, y: 0.0, width: 40.0, height: 40.0))
             UIColor.green.setFill()
             context.cgContext.fillEllipse(in: CGRect(x: 80.0, y: 10.0, width: 20.0, height: 20.0))
+        }
+    }
+    func circleImage() -> UIImage {
+        let size = CGSize(width: 100.0, height: 100.0)
+        let diagram: Diagram = circle(diameter: size.width)
+        return image(in: size) { (context, bound) in
+            context.draw(diagram, in: bound)
+        }
+    }
+    func populationImage() -> UIImage {
+        let bound = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 100.0)
+        let renderner = UIGraphicsImageRenderer(bounds: bound)
+        let datas: [(String, Float)] = [("衡阳", 1153.0), ("北京", 2345.0), ("上海", 4532.0), ("广州", 3232.0), ("深圳", 3474.0)]
+        return renderner.image { (context) in
+            context.cgContext.draw(barGraph(input: datas), in: bound)
         }
     }
     
