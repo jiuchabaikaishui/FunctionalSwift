@@ -67,7 +67,7 @@ extension CGPoint {
 
 extension CGSize {
     func fit(into rect: CGRect, alignment: CGPoint) -> CGRect {
-        let scale = min(width/rect.size.width, height/rect.size.height)
+        let scale = min(rect.width/width, rect.height/height)
         let targetSize = scale*self
         let spacerSize = alignment.size*(rect.size - targetSize)
         return CGRect(origin: rect.origin + spacerSize.point, size: targetSize)
@@ -117,12 +117,12 @@ extension CGContext {
             let frame = diagram.size.fit(into: bound, alignment: alignment)
             draw(diagram, in: frame)
         case let .beside(left, right):
-            let radio = left.size.width/right.size.width
+            let radio = left.size.width/diagram.size.width
             let (leftBound, rightBound) = bound.split(ratio: radio, edge: .minXEdge)
-            draw(left, in: leftBound)
             draw(right, in: rightBound)
+            draw(left, in: leftBound)
         case let .below(top, down):
-            let radio = top.size.width/down.size.width
+            let radio = top.size.height/diagram.size.height
             let (topBound, downBound) = bound.split(ratio: radio, edge: .minYEdge)
             draw(top, in: topBound)
             draw(down, in: downBound)
@@ -195,13 +195,20 @@ extension Sequence where Element == CGFloat {
 func barGraph(input: [(String, Float)]) -> Diagram {
     let values = input.map { CGFloat($0.1) }
     let bars = values.normalized.map { (v) in
-        return rect(width: 1.0, height: 3.0*v).filled(color: UIColor.black).aligned(position: CGPoint.bottom)
+        return rect(width: 1.0, height: 3*v).filled(color: UIColor.random).aligned(position: CGPoint.bottom)
     }.hcat
     let labels = input.map { (label, _) in
-        return text(content: label, width: 1.0, height: 1.0).filled(color: UIColor.black)
+        return text(content: label, width: 1.0, height: 0.3).aligned(position: .top)
     }.hcat
-    
+
     return bars --- labels
+}
+
+
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(red: ((CGFloat)(arc4random()%256))/255.0, green: ((CGFloat)(arc4random()%256))/255.0, blue: ((CGFloat)(arc4random()%256))/255.0, alpha: 1.0)
+    }
 }
 
 struct CellModel {
@@ -246,12 +253,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         datas.append(CellModel(title: "画个文字", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
             context.draw(text(content: "画个文字", width: bound.width, height: bound.height).filled(color: UIColor.orange).aligned(position: .center), in: bound)
         })))
-        datas.append(CellModel(title: "画两个矩形", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+        datas.append(CellModel(title: "左右排列", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
             let left = rect(width: 50.0, height: 20.0).filled(color: UIColor.blue).aligned(position: .bottom)
             let right = rect(width: 50.0, height: 30.0).filled(color: UIColor.purple).aligned(position: .bottom)
             context.draw(left ||| right, in: bound)
         })))
-        datas.append(CellModel(title: "xx", image: nil))
+        datas.append(CellModel(title: "上下排列", image: image(in: CGSize(width: 50.0, height: 100.0), draw: { (context, bound) in
+            let left = rect(width: 50.0, height: 30.0).filled(color: UIColor.blue).aligned(position: .bottom)
+            let right = text(content: "北京", width: 50, height: 30).filled(color: UIColor.purple).aligned(position: .top)
+            context.draw(left --- right, in: bound)
+        })))
+        let contens: [(String, Float)] = [("衡阳", 1153.0), ("北京", 2345.0), ("上海", 4532.0), ("广州", 3232.0), ("深圳", 3474.0)]
+        datas.append(CellModel(title: "画个图表", image: image(in: CGSize(width: 50.0*((CGFloat)(contens.count)), height: 165.0), draw: { (context, bound) in
+            context.draw(barGraph(input: contens), in: bound)
+        })))
     }
     
     func image(in size: CGSize, draw: (CGContext, CGRect) -> Void) -> UIImage {
@@ -283,21 +298,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             context.fill(CGRect(x: 40.0, y: 0.0, width: 40.0, height: 40.0))
             UIColor.green.setFill()
             context.cgContext.fillEllipse(in: CGRect(x: 80.0, y: 10.0, width: 20.0, height: 20.0))
-        }
-    }
-    func circleImage() -> UIImage {
-        let size = CGSize(width: 100.0, height: 100.0)
-        let diagram: Diagram = circle(diameter: size.width)
-        return image(in: size) { (context, bound) in
-            context.draw(diagram, in: bound)
-        }
-    }
-    func populationImage() -> UIImage {
-        let bound = CGRect(x: 0.0, y: 0.0, width: 200.0, height: 100.0)
-        let renderner = UIGraphicsImageRenderer(bounds: bound)
-        let datas: [(String, Float)] = [("衡阳", 1153.0), ("北京", 2345.0), ("上海", 4532.0), ("广州", 3232.0), ("深圳", 3474.0)]
-        return renderner.image { (context) in
-            context.cgContext.draw(barGraph(input: datas), in: bound)
         }
     }
     
