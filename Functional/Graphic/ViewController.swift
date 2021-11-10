@@ -13,6 +13,26 @@ enum Primitive {
     case text(String)
 }
 
+extension CGContext {
+    func draw(_ primitive: Primitive, in frame: CGRect) {
+        switch primitive {
+        case .ellipse:
+            fillEllipse(in: frame)
+        case .rectangle:
+            fill(frame)
+        case .text(let text):
+            let attributeText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+            attributeText.draw(in: frame)
+        }
+    }
+}
+
+func image(in size: CGSize, draw: (CGContext, CGRect) -> Void) -> UIImage {
+    let bound = CGRect(origin: CGPoint.zero, size: size)
+    let renderner = UIGraphicsImageRenderer(bounds: bound)
+    return renderner.image { draw($0.cgContext, bound) }
+}
+
 enum Attribute {
     case fillColor(UIColor)
 }
@@ -96,18 +116,6 @@ extension CGRect {
 }
 
 extension CGContext {
-    func draw(_ primitive: Primitive, in frame: CGRect) {
-        switch primitive {
-        case .rectangle:
-            fill(frame)
-        case .ellipse:
-            fillEllipse(in: frame)
-        case .text(let text):
-            let attributeText = NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
-            attributeText.draw(in: frame)
-        }
-    }
-    
     func draw(_ diagram: Diagram, in bound: CGRect) {
         switch diagram {
         case let .primitive(size, primiteve):
@@ -192,10 +200,16 @@ extension Sequence where Element == CGFloat {
     }
 }
 
+extension UIColor {
+    static var random: UIColor {
+        return UIColor(red: ((CGFloat)(arc4random()%256))/255.0, green: ((CGFloat)(arc4random()%256))/255.0, blue: ((CGFloat)(arc4random()%256))/255.0, alpha: 1.0)
+    }
+}
+
 func barGraph(input: [(String, Float)]) -> Diagram {
     let values = input.map { CGFloat($0.1) }
     let bars = values.normalized.map { (v) in
-        return rect(width: 1.0, height: 3*v).filled(color: UIColor.random).aligned(position: CGPoint.bottom)
+        return rect(width: 1.0, height: 3*v).filled(color: .random).aligned(position: CGPoint.bottom)
     }.hcat
     let labels = input.map { (label, _) in
         return text(content: label, width: 1.0, height: 0.3).aligned(position: .top)
@@ -204,12 +218,6 @@ func barGraph(input: [(String, Float)]) -> Diagram {
     return bars --- labels
 }
 
-
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(red: ((CGFloat)(arc4random()%256))/255.0, green: ((CGFloat)(arc4random()%256))/255.0, blue: ((CGFloat)(arc4random()%256))/255.0, alpha: 1.0)
-    }
-}
 
 struct CellModel {
     let title: String?
@@ -231,6 +239,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         buildUI()
         buildData()
+        
+        let ceter = CGPoint(x: 0.5, y: 0.5)
+        let target = CGRect(x: 0, y: 0, width: 200, height: 100)
+        let size = CGSize(width: 1, height: 1)
+        print("\(size.fit(into: target, alignment: ceter))")
+        // 输出：(50.0, 0.0, 100.0, 100.0)
+        
+        let leftTop = CGPoint(x: 0, y: 0)
+        print("\(size.fit(into: target, alignment: leftTop))")
+        // 输出：(0.0, 0.0, 100.0, 100.0)
     }
 
     func buildUI() {
@@ -243,25 +261,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     func buildData() {
         datas.append(CellModel(title: "绘制正方形和圆", image: drawSC()))
-        datas.append(CellModel(title: "加一个圆", image: addC()))
-        datas.append(CellModel(title: "画个圆", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
-            context.draw(circle(diameter: bound.width).filled(color: UIColor.red), in: bound)
+        datas.append(CellModel(title: "加个圆", image: addC()))
+        datas.append(CellModel(title: "画个椭圆", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            context.draw(.ellipse, in: bound)
         })))
-        datas.append(CellModel(title: "画个正方形", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
-            context.draw(square(side: bound.width).filled(color: UIColor.yellow), in: bound)
+        datas.append(CellModel(title: "画个矩形", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            context.draw(.rectangle, in: bound)
         })))
-        datas.append(CellModel(title: "画个文字", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
-            context.draw(text(content: "画个文字", width: bound.width, height: bound.height).filled(color: UIColor.orange).aligned(position: .center), in: bound)
+        datas.append(CellModel(title: "画个文字", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            context.draw(.text("我是文字"), in: bound)
         })))
-        datas.append(CellModel(title: "左右排列", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
-            let left = rect(width: 50.0, height: 20.0).filled(color: UIColor.blue).aligned(position: .bottom)
-            let right = rect(width: 50.0, height: 30.0).filled(color: UIColor.purple).aligned(position: .bottom)
-            context.draw(left ||| right, in: bound)
+        datas.append(CellModel(title: "基本图表", image: image(in: CGSize(width: 50.0, height: 50.0), draw: { (context, bound) in
+            context.draw(.primitive(bound.size, .rectangle), in: bound)
         })))
-        datas.append(CellModel(title: "上下排列", image: image(in: CGSize(width: 50.0, height: 100.0), draw: { (context, bound) in
-            let left = rect(width: 50.0, height: 30.0).filled(color: UIColor.blue).aligned(position: .bottom)
-            let right = text(content: "北京", width: 50, height: 30).filled(color: UIColor.purple).aligned(position: .top)
-            context.draw(left --- right, in: bound)
+        datas.append(CellModel(title: "左右排列图表", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            let left = Diagram.primitive(CGSize(width: 50, height: 20), .rectangle)
+            let right = Diagram.primitive(CGSize(width: 50, height: 30), .rectangle)
+            context.draw(.beside(left, right), in: bound)
+        })))
+        datas.append(CellModel(title: "上下排列图表", image: image(in: CGSize(width: 50.0, height: 100.0), draw: { (context, bound) in
+            let top = Diagram.primitive(CGSize(width: 50, height: 30), .rectangle)
+            let bottom = Diagram.primitive(CGSize(width: 50, height: 20), .text("北京"))
+            context.draw(.below(top, bottom), in: bound)
+        })))
+        datas.append(CellModel(title: "红色图表", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            let red = Diagram.attributed(.fillColor(UIColor.red), .primitive(bound.size, .ellipse))
+            context.draw(red, in: bound)
+        })))
+        datas.append(CellModel(title: "右对齐图表", image: image(in: CGSize(width: 100.0, height: 50.0), draw: { (context, bound) in
+            context.draw(.align(CGPoint(x: 1, y: 0.5), .primitive(CGSize(width: 50, height: 50), .rectangle)), in: bound)
         })))
         let contens: [(String, Float)] = [("衡阳", 1153.0), ("北京", 2345.0), ("上海", 4532.0), ("广州", 3232.0), ("深圳", 3474.0)]
         datas.append(CellModel(title: "画个图表", image: image(in: CGSize(width: 50.0*((CGFloat)(contens.count)), height: 165.0), draw: { (context, bound) in
@@ -269,11 +297,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         })))
     }
     
-    func image(in size: CGSize, draw: (CGContext, CGRect) -> Void) -> UIImage {
-        let bound = CGRect(origin: CGPoint.zero, size: size)
-        let renderner = UIGraphicsImageRenderer(bounds: bound)
-        return renderner.image { draw($0.cgContext, bound) }
-    }
     func drawSC() -> UIImage {
         let bound = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 40.0)
         let renderner = UIGraphicsImageRenderer(bounds: bound)
