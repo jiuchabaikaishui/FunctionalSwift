@@ -60,6 +60,7 @@ let num = powerIterator.find { $0.intValue > 1000 }
 if let value = num {
     print(value)
 }
+/// 输出：1024
 
 
 struct FileLinesIterator: IteratorProtocol {
@@ -126,3 +127,49 @@ extension Int {
         }
     }
 }
+
+func +<I: IteratorProtocol, J: IteratorProtocol>(first: I, second: J) -> AnyIterator<I.Element> where I.Element == J.Element {
+    var i = first
+    var j = second
+    return AnyIterator { i.next() ?? j.next() }
+}
+
+func +<I: IteratorProtocol, J: IteratorProtocol>(first: I, second: @escaping @autoclosure () -> J) -> AnyIterator<I.Element> where I.Element == J.Element {
+    var one = first;
+    var other: J? = nil
+    return AnyIterator {
+        if other != nil {
+            return other?.next()
+        } else if let result = one.next() {
+            return result
+        } else {
+            other = second()
+            return other?.next()
+        }
+    }
+}
+
+
+struct ReverseArrayIndices<T>: Sequence {
+    let array: [T]
+    init(array: [T]) {
+        self.array = array
+    }
+    func makeIterator() -> ReverseIndexIterator {
+        return ReverseIndexIterator(array: array)
+    }
+}
+
+
+var array = ["one", "two", "three"]
+let reverseSequence = ReverseArrayIndices(array: array)
+var reverseIterator = reverseSequence.makeIterator()
+while let i = reverseIterator.next() {
+    print("第\(i)个元素是\(array[i])")
+}
+/*
+ 输出：
+ 第2个元素是three
+ 第1个元素是two
+ 第0个元素是one
+ */
