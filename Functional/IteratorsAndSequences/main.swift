@@ -173,3 +173,34 @@ while let i = reverseIterator.next() {
  第1个元素是two
  第0个元素是one
  */
+
+for i in reverseSequence {
+    print("第\(i)个元素是\(array[i])")
+}
+/*
+ 输出：
+ 第2个元素是three
+ 第1个元素是two
+ 第0个元素是one
+ */
+
+
+let reverseElements = reverseSequence.map { array[$0] }
+for x in reverseElements {
+    print("元素是：\(x)")
+}
+/*
+ 输出：
+ 元素是：three
+ 元素是：two
+ 元素是：one
+ */
+
+(1...10).filter { $0%3 == 0 }.map { $0*$0 }
+
+var result: [Int] = []
+for element in (1...10) {
+    if element%3 == 0 {
+        result.append(element*element)
+    }
+}
