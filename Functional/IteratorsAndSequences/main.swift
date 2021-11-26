@@ -128,11 +128,11 @@ extension Int {
     }
 }
 
-func +<I: IteratorProtocol, J: IteratorProtocol>(first: I, second: J) -> AnyIterator<I.Element> where I.Element == J.Element {
-    var i = first
-    var j = second
-    return AnyIterator { i.next() ?? j.next() }
-}
+//func +<I: IteratorProtocol, J: IteratorProtocol>(first: I, second: J) -> AnyIterator<I.Element> where I.Element == J.Element {
+//    var i = first
+//    var j = second
+//    return AnyIterator { i.next() ?? j.next() }
+//}
 
 func +<I: IteratorProtocol, J: IteratorProtocol>(first: I, second: @escaping @autoclosure () -> J) -> AnyIterator<I.Element> where I.Element == J.Element {
     var one = first;
@@ -196,11 +196,41 @@ for x in reverseElements {
  元素是：one
  */
 
-(1...10).filter { $0%3 == 0 }.map { $0*$0 }
+let _ = (1...10).filter { $0%3 == 0 }.map { $0*$0 }
 
 var result: [Int] = []
 for element in (1...10) {
     if element%3 == 0 {
         result.append(element*element)
+    }
+}
+
+let lazyResult = (1...10).lazy.filter { $0%3 == 0 }.map { $0*$0 }
+
+let _ = Array(lazyResult)
+for e in lazyResult {
+    print(e)
+}
+/*
+ 输出：
+ 9
+ 36
+ 81
+*/
+
+
+indirect enum BinarySearchTree<Element: Comparable> {
+    case leaf
+    case node(BinarySearchTree<Element>, Element, BinarySearchTree<Element>)
+}
+
+extension BinarySearchTree: Sequence {
+    func makeIterator() -> AnyIterator<Element> {
+        switch self {
+        case .leaf:
+            return AnyIterator { nil }
+        case let .node(left, element, right):
+            return left.makeIterator() + CollectionOfOne(element).makeIterator() + right.makeIterator()
+        }
     }
 }
