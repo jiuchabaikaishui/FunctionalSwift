@@ -234,3 +234,38 @@ extension BinarySearchTree: Sequence {
         }
     }
 }
+
+
+//protocol Smaller {
+//    func small() -> Self?
+//}
+//
+//extension Array: Smaller {
+//    func small() -> Array<Element>? {
+//        if self.isEmpty { return nil }
+//        return Array(dropFirst())
+//    }
+//}
+
+protocol Smaller {
+    func small() -> AnyIterator<Self>
+}
+extension Array: Smaller {
+    func small() -> AnyIterator<Array<Element>> {
+        var i = 0
+        return AnyIterator {
+            guard i < self.endIndex else { return nil }
+            var result = self
+            result.remove(at: i)
+            i += 1
+            return result
+        }
+    }
+}
+
+let v = Array([1, 2, 3].small())
+print(v)
+/*
+ 输出：
+ [[2, 3], [1, 3], [1, 2]]
+*/

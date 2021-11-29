@@ -83,7 +83,7 @@ extension String: Smaller {
 
 
 func iterateWhile<A>(condition: (A) -> Bool, inital: A, next: (A) -> A?) -> A {
-    guard let vaule = next(inital) else {
+    guard let vaule = next(inital), condition(vaule) else {
         return inital
     }
     
