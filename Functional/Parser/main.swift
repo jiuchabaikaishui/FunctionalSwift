@@ -86,13 +86,42 @@ extension Parser {
     }
 }
 
-let intger = digit.many.map { Int(String($0)) }
-if let v = intger.run("123") { print(v) }
+let integer = digit.many.map { Int(String($0)) }
+if let v = integer.run("123") { print(v) }
 /*输出：
  (Optional(123), "")
  */
 
-if let v = intger.run("123abc") { print(v) }
+if let v = integer.run("123abc") { print(v) }
 /*输出：
  (Optional(123), "abc")
+ */
+
+
+
+extension Parser {
+    func followed<A>(by other: Parser<A>) -> Parser<(Result, A)> {
+        return Parser<(Result, A)> { input in
+            guard let (result1, remainder1) = run(input) else { return nil }
+            guard let (result2, remainder2) = other.run(remainder1) else { return nil }
+            return ((result1, result2), remainder2)
+        }
+    }
+}
+
+let multiplication = integer
+    .followed(by: character { $0 == "*" })
+    .followed(by: integer)
+if let v = multiplication.run("2*3") { print(v) }
+/*输出：
+ (((Optional(2), "*"), Optional(3)), "")
+ */
+
+let multiplication2 = multiplication.map { result -> Int? in
+    guard let f = result.0.0, let s = result.1 else { return nil }
+    return f*s
+}
+if let v = multiplication2.run("2*3") { print(v) }
+/*输出：
+ (Optional(6), "")
  */
