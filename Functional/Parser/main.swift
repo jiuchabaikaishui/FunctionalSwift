@@ -86,15 +86,15 @@ extension Parser {
     }
 }
 
-let integer = digit.many.map { Int(String($0)) }
+let integer = digit.many.map { Int(String($0))! }
 if let v = integer.run("123") { print(v) }
 /*输出：
- (Optional(123), "")
+ (123, "")
  */
 
 if let v = integer.run("123abc") { print(v) }
 /*输出：
- (Optional(123), "abc")
+ (123, "abc")
  */
 
 
@@ -114,14 +114,56 @@ let multiplication = integer
     .followed(by: integer)
 if let v = multiplication.run("2*3") { print(v) }
 /*输出：
- (((Optional(2), "*"), Optional(3)), "")
+ (((2, "*"), 3), "")
  */
 
-let multiplication2 = multiplication.map { result -> Int? in
-    guard let f = result.0.0, let s = result.1 else { return nil }
-    return f*s
-}
+let multiplication2 = multiplication.map { $0.0.0*$0.1 }
 if let v = multiplication2.run("2*3") { print(v) }
 /*输出：
- (Optional(6), "")
+ (6, "")
  */
+
+
+func multiply(lhs: (Int, Character), rhs: Int) -> Int {
+    return lhs.0*rhs
+}
+
+func multiply(_ x: Int, _ op: Character, _ y: Int) -> Int {
+    return x*y
+}
+
+func curriedMultiply(_ x: Int) -> (Character) -> (Int) -> Int {
+    return { op in
+        { y in
+            return x*y
+        }
+    }
+}
+print(curriedMultiply(2)("*")(3))
+/*输出：
+ 6
+ */
+
+func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+    return { a in { b in f(a, b) } }
+}
+
+let p1 = integer.map(curriedMultiply)
+
+let p2 = p1.followed(by: character { $0 == "*" })
+
+let p3 = p2.map { $0.0($0.1) }
+
+let p4 = p3.followed(by: integer)
+let p5 = p4.map { $0.0($0.1) }
+
+if let v = p5.run("2*3") { print(v) }
+/*输出：
+ (6, "")
+ */
+
+let multiplication3 = integer.map(curriedMultiply)
+    .followed(by: character { $0 == "*"} )
+    .map { $0.0($0.1) }
+    .followed(by: integer)
+    .map { $0.0($0.1) }
