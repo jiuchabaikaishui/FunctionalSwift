@@ -167,3 +167,63 @@ let multiplication3 = integer.map(curriedMultiply)
     .map { $0.0($0.1) }
     .followed(by: integer)
     .map { $0.0($0.1) }
+
+precedencegroup SequencePrecedence {
+    associativity: left
+    higherThan: AdditionPrecedence
+}
+infix operator <*> : SequencePrecedence
+func <*><A, B>(lhs: Parser<(A) -> B>, rhs: Parser<A>) -> Parser<B> {
+    return lhs.followed(by: rhs).map { $0.0($0.1) }
+}
+
+let multiplication4 = integer.map(curriedMultiply)<*>character { $0 == "*" }<*>integer
+
+infix operator <^> : SequencePrecedence
+func <^><A, B>(lsh: @escaping (A) -> B, rsh: Parser<A>) -> Parser<B> {
+    return rsh.map(lsh)
+}
+
+let multiplication5 = curriedMultiply<^>integer<*>character { $0 == "*" }<*>integer
+
+
+infix operator *> : SequencePrecedence
+func *><A, B>(lsh: Parser<A>, rsh: Parser<B>) -> Parser<B> {
+    return curry { _, y in y }<^>lsh<*>rsh
+}
+
+infix operator <* : SequencePrecedence
+func <*<A, B>(lsh: Parser<A>, rsh: Parser<B>) -> Parser<A> {
+    return curry { x, _ in x }<^>lsh<*>rsh
+}
+
+
+extension Parser {
+    func or(_ other: Parser<Result>) -> Parser<Result> {
+        return Parser { run($0) ?? other.run($0) }
+    }
+}
+
+let star = character { $0 == "*" }
+let plus = character { $0 == "+" }
+let starOrPlus = star.or(plus)
+if let v = starOrPlus.run("+") { print(v) }
+/*输出：
+ ("+", "")
+ */
+
+infix operator <|>
+func <|><A>(lsh: Parser<A>, rsh: Parser<A>) -> Parser<A> {
+    return Parser { lsh.run($0) ?? rsh.run($0) }
+}
+if let v = (star<|>plus).run("+") { print(v) }
+/*输出：
+ ("+", "")
+ */
+
+
+extension Parser {
+    var many1: Parser<[Result]> {
+        return { x in { manyX in [x] + manyX } }<^>self<*>self.many
+    }
+}
