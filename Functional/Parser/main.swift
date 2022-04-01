@@ -192,10 +192,22 @@ func *><A, B>(lsh: Parser<A>, rsh: Parser<B>) -> Parser<B> {
     return curry { _, y in y }<^>lsh<*>rsh
 }
 
+let positive = character { $0 == "+" }*>digit
+if let v = positive.run("+5") { print(v) }
+/*输出：
+ ("5", "")
+ */
+
 infix operator <* : SequencePrecedence
 func <*<A, B>(lsh: Parser<A>, rsh: Parser<B>) -> Parser<A> {
     return curry { x, _ in x }<^>lsh<*>rsh
 }
+
+let op = character { $0 == "*" }<*digit
+if let v = op.run("*2") { print(v) }
+/*输出：
+ ("*", "")
+ */
 
 
 extension Parser {
@@ -225,5 +237,136 @@ if let v = (star<|>plus).run("+") { print(v) }
 extension Parser {
     var many1: Parser<[Result]> {
         return { x in { manyX in [x] + manyX } }<^>self<*>self.many
+    }
+}
+if let v = digit.many1.run("1234") { print(v) }
+/*输出：
+ (["1", "2", "3", "4"], "")
+ */
+
+extension Parser {
+    var many2: Parser<[Result]> {
+        return curry { [$0] + $1 }<^>self<*>self.many
+    }
+}
+if let v = digit.many2.run("23456") { print(v) }
+/*输出：
+ (["2", "3", "4", "5", "6"], "")
+ */
+
+
+extension Parser {
+    var optional: Parser<Result?> {
+        return Parser<Result?> { input in
+            guard let result = self.run(input) else { return (nil, input) }
+            
+            return result
+        }
+    }
+}
+
+
+print(2*3+4*6/2-10)
+let mul = curry { return $0*($1 ?? 1) }<^>integer<*>(character{ $0 == "*" }*>integer).optional
+if let v = mul.run("4*6")?.0 { print(v) }
+/*输出：
+ 24
+ */
+let division = curry { return $0/($1 ?? 1) }<^>mul<*>(character{ $0 == "/" }*>integer).optional
+if let v = division.run("4*6/2")?.0 { print(v) }
+/*输出：
+ 12
+ */
+let addition = curry { return $0+($1 ?? 0) }<^>mul<*>(character{ $0 == "+" }*>division).optional
+if let v = addition.run("2*3+4*6/2")?.0 { print(v) }
+/*输出：
+ 18
+ */
+let minus = curry { $0 - ($1 ?? 0) }<^>addition<*>(character{ $0 == "-" }*>integer).optional
+if let v = minus.run("2*3+4*6/2-10")?.0 { print(v) }
+/*输出：
+ 8
+ */
+
+//let division = curry({ $0 / ($1 ?? 1) }) <^>
+//    mul <*> (character { $0 == "/" } *> mul).optional
+//if let v = division.run("4*6/2")?.0 { print(v) }
+//let addition = curry({ $0 + ($1 ?? 0) }) <^>
+//division <*> (character { $0 == "+" } *> division).optional
+//if let v = addition.run("2*3+4*6/2")?.0 { print(v) }
+//let minus = curry({ $0 - ($1 ?? 0) }) <^>
+//addition <*> (character { $0 == "-" } *> addition).optional
+//if let v = minus.run("2*3+4*6/2-10")?.0 { print(v) }
+
+
+struct Parser2<Result> {
+    typealias Stream = String
+    let pase: (inout Stream) -> Result?
+}
+func character2(matching condition: @escaping (Character) -> Bool) -> Parser2<Character> {
+    return Parser2<Character> { input in
+        guard let c = input.first, condition(c) else { return nil }
+        input = String(input.dropFirst())
+        return c
+    }
+}
+var s = "cd"
+let c = character2 { $0 == "c" }
+if let v = c.pase(&s) { print(v) }
+print(s)
+/*输出：
+ c
+ d
+ */
+
+extension Parser2 {
+    var many: Parser2<[Result]> {
+        return Parser2<[Result]> { input in
+            var result: [Result] = []
+            while let element = self.pase(&input) {
+                result.append(element)
+            }
+            
+            if result.count > 0 { return result }
+            else { return nil }
+        }
+    }
+    func map<T>(transform: @escaping (Result) -> T) -> Parser2<T> {
+        return Parser2<T>{ input in
+            guard let result = self.pase(&input) else { return nil }
+            
+            return transform(result)
+        }
+    }
+}
+let digit2 = character2 { CharacterSet.decimalDigits.contains($0) }
+s = "123"
+if let v = digit2.pase(&s) { print(v) }
+print(s)
+/*输出：
+ 1
+ 23
+ */
+let integer2 = digit2.many.map {
+    return Int(String($0))!
+}
+s = "12345abc"
+if let v = integer2.pase(&s) { print(v) }
+print(s)
+/*输出：
+ 12345
+ abc
+ */
+
+extension Parser2 {
+    func or(_ other: Parser2<Result>) -> Parser2<Result> {
+        return Parser2<Result> { input in
+            let original = input
+            guard let result = self.pase(&input) else {
+                input = original
+                return other.pase(&input)
+            }
+            return result
+        }
     }
 }
