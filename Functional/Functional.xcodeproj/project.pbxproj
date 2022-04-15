@@ -25,6 +25,9 @@
 		6E88082A26A97945008873C3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E88082926A97945008873C3 /* main.swift */; };
 		6E98C22326BA8AF300CBD9FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E98C22226BA8AF300CBD9FE /* main.swift */; };
 		6EB6187B269C28D900E7A00D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6187A269C28D900E7A00D /* main.swift */; };
+		6EC219F927FC2EA000DED4DD /* Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC219F827FC2EA000DED4DD /* Parsing.swift */; };
+		6EC21A1327FC302100DED4DD /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC21A1227FC302100DED4DD /* Helper.swift */; };
+		6EC21A2127FC3BBB00DED4DD /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC21A2027FC3BBB00DED4DD /* Expression.swift */; };
 		6ECB89CE272E46C7004D9B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB89CD272E46C7004D9B74 /* AppDelegate.swift */; };
 		6ECB89D0272E46C7004D9B74 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB89CF272E46C7004D9B74 /* SceneDelegate.swift */; };
 		6ECB89D2272E46C7004D9B74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB89D1272E46C7004D9B74 /* ViewController.swift */; };
@@ -33,6 +36,10 @@
 		6ECB89DA272E46D5004D9B74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECB89D8272E46D5004D9B74 /* LaunchScreen.storyboard */; };
 		6ECB89F0273CC836004D9B74 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECB89EF273CC836004D9B74 /* main.swift */; };
 		6EE501DB2756093000238F43 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE501DA2756093000238F43 /* main.swift */; };
+		6EE7BD2C27FAEFE600433023 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7BD2B27FAEFE600433023 /* AppDelegate.swift */; };
+		6EE7BD2E27FAEFE600433023 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7BD2D27FAEFE600433023 /* ViewController.swift */; };
+		6EE7BD3027FAEFF300433023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7BD2F27FAEFF300433023 /* Assets.xcassets */; };
+		6EE7BD3327FAEFF300433023 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7BD3127FAEFF300433023 /* Main.storyboard */; };
 		6EEC5B2C268B269B0094757A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EEC5B2B268B269B0094757A /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +146,9 @@
 		6E98C22226BA8AF300CBD9FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6EB61878269C28D900E7A00D /* QuickCheck */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = QuickCheck; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB6187A269C28D900E7A00D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6EC219F827FC2EA000DED4DD /* Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parsing.swift; sourceTree = "<group>"; };
+		6EC21A1227FC302100DED4DD /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		6EC21A2027FC3BBB00DED4DD /* Expression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expression.swift; sourceTree = "<group>"; };
 		6ECB89CB272E46C7004D9B74 /* Graphic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ECB89CD272E46C7004D9B74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6ECB89CF272E46C7004D9B74 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +161,13 @@
 		6ECB89EF273CC836004D9B74 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		6EE501D82756093000238F43 /* Parser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Parser; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE501DA2756093000238F43 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6EE7BD2927FAEFE600433023 /* Spreadsheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spreadsheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EE7BD2B27FAEFE600433023 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6EE7BD2D27FAEFE600433023 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6EE7BD2F27FAEFF300433023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6EE7BD3227FAEFF300433023 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6EE7BD3427FAEFF300433023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EE7BD3527FAEFF300433023 /* Spreadsheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Spreadsheet.entitlements; sourceTree = "<group>"; };
 		6EEC5B29268B269B0094757A /* OptionValue */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OptionValue; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EEC5B2B268B269B0094757A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -226,6 +243,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6EE7BD2627FAEFE600433023 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EEC5B26268B269B0094757A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +282,7 @@
 				6ECB89CC272E46C7004D9B74 /* Graphic */,
 				6ECB89EE273CC836004D9B74 /* IteratorsAndSequences */,
 				6EE501D92756093000238F43 /* Parser */,
+				6EE7BD2A27FAEFE600433023 /* Spreadsheet */,
 				5C4013CE219C09E9003976B9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -276,6 +301,7 @@
 				6ECB89CB272E46C7004D9B74 /* Graphic.app */,
 				6ECB89ED273CC836004D9B74 /* IteratorsAndSequences */,
 				6EE501D82756093000238F43 /* Parser */,
+				6EE7BD2927FAEFE600433023 /* Spreadsheet.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -369,6 +395,22 @@
 				6EE501DA2756093000238F43 /* main.swift */,
 			);
 			path = Parser;
+			sourceTree = "<group>";
+		};
+		6EE7BD2A27FAEFE600433023 /* Spreadsheet */ = {
+			isa = PBXGroup;
+			children = (
+				6EE7BD2B27FAEFE600433023 /* AppDelegate.swift */,
+				6EC219F827FC2EA000DED4DD /* Parsing.swift */,
+				6EC21A1227FC302100DED4DD /* Helper.swift */,
+				6EC21A2027FC3BBB00DED4DD /* Expression.swift */,
+				6EE7BD2D27FAEFE600433023 /* ViewController.swift */,
+				6EE7BD2F27FAEFF300433023 /* Assets.xcassets */,
+				6EE7BD3127FAEFF300433023 /* Main.storyboard */,
+				6EE7BD3427FAEFF300433023 /* Info.plist */,
+				6EE7BD3527FAEFF300433023 /* Spreadsheet.entitlements */,
+			);
+			path = Spreadsheet;
 			sourceTree = "<group>";
 		};
 		6EEC5B2A268B269B0094757A /* OptionValue */ = {
@@ -552,6 +594,23 @@
 			productReference = 6EE501D82756093000238F43 /* Parser */;
 			productType = "com.apple.product-type.tool";
 		};
+		6EE7BD2827FAEFE600433023 /* Spreadsheet */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EE7BD3827FAEFF300433023 /* Build configuration list for PBXNativeTarget "Spreadsheet" */;
+			buildPhases = (
+				6EE7BD2527FAEFE600433023 /* Sources */,
+				6EE7BD2627FAEFE600433023 /* Frameworks */,
+				6EE7BD2727FAEFE600433023 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Spreadsheet;
+			productName = Spreadsheet;
+			productReference = 6EE7BD2927FAEFE600433023 /* Spreadsheet.app */;
+			productType = "com.apple.product-type.application";
+		};
 		6EEC5B28268B269B0094757A /* OptionValue */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EEC5B2F268B269B0094757A /* Build configuration list for PBXNativeTarget "OptionValue" */;
@@ -608,6 +667,9 @@
 					6EE501D72756093000238F43 = {
 						CreatedOnToolsVersion = 12.4;
 					};
+					6EE7BD2827FAEFE600433023 = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					6EEC5B28268B269B0094757A = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -637,6 +699,7 @@
 				6ECB89CA272E46C7004D9B74 /* Graphic */,
 				6ECB89EC273CC836004D9B74 /* IteratorsAndSequences */,
 				6EE501D72756093000238F43 /* Parser */,
+				6EE7BD2827FAEFE600433023 /* Spreadsheet */,
 			);
 		};
 /* End PBXProject section */
@@ -670,6 +733,15 @@
 				6ECB89DA272E46D5004D9B74 /* LaunchScreen.storyboard in Resources */,
 				6ECB89D7272E46D5004D9B74 /* Assets.xcassets in Resources */,
 				6ECB89D5272E46C7004D9B74 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EE7BD2727FAEFE600433023 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE7BD3027FAEFF300433023 /* Assets.xcassets in Resources */,
+				6EE7BD3327FAEFF300433023 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +834,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6EE7BD2527FAEFE600433023 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EE7BD2E27FAEFE600433023 /* ViewController.swift in Sources */,
+				6EC219F927FC2EA000DED4DD /* Parsing.swift in Sources */,
+				6EE7BD2C27FAEFE600433023 /* AppDelegate.swift in Sources */,
+				6EC21A1327FC302100DED4DD /* Helper.swift in Sources */,
+				6EC21A2127FC3BBB00DED4DD /* Expression.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6EEC5B25268B269B0094757A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -819,6 +903,14 @@
 				6ECB89D9272E46D5004D9B74 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6EE7BD3127FAEFF300433023 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EE7BD3227FAEFF300433023 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1271,8 +1363,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1337,8 +1429,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1396,8 +1488,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1462,8 +1554,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1521,8 +1613,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1587,8 +1679,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1646,8 +1738,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1712,8 +1804,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1913,8 +2005,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1979,8 +2071,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2038,8 +2130,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2104,8 +2196,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2119,6 +2211,151 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		6EE7BD3627FAEFF300433023 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Spreadsheet/Spreadsheet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = XCL3BJXWK5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Spreadsheet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qsp.Spreadsheet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6EE7BD3727FAEFF300433023 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = Spreadsheet/Spreadsheet.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = XCL3BJXWK5;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Spreadsheet/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.qsp.Spreadsheet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -2164,7 +2401,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2230,7 +2467,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = XCL3BJXWK5;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -2350,6 +2587,15 @@
 			buildConfigurations = (
 				6EE501DC2756093000238F43 /* Debug */,
 				6EE501DD2756093000238F43 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EE7BD3827FAEFF300433023 /* Build configuration list for PBXNativeTarget "Spreadsheet" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EE7BD3627FAEFF300433023 /* Debug */,
+				6EE7BD3727FAEFF300433023 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

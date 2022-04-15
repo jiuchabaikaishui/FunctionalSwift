@@ -224,7 +224,7 @@ if let v = starOrPlus.run("+") { print(v) }
  ("+", "")
  */
 
-infix operator <|>
+infix operator <|> : SequencePrecedence
 func <|><A>(lsh: Parser<A>, rsh: Parser<A>) -> Parser<A> {
     return Parser { lsh.run($0) ?? rsh.run($0) }
 }
