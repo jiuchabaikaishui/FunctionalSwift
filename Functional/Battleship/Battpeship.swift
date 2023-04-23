@@ -125,7 +125,7 @@ func circle1(center: Position, radius: Distance) -> Region {
 ///   - offset: 偏移量
 /// - Returns: 移动后的区域
 func shift(region: @escaping Region, offset: Position) -> Region {
-    return { point in region(point.plus(tagert: offset)) }
+    return { point in region(point.minus(tagert: offset)) }
 }
 
 /// 反转区域
@@ -163,7 +163,7 @@ func union(region1: @escaping Region, region2: @escaping Region) -> Region {
 ///   - mimus: 做差区域
 /// - Returns: 差区域
 func difference(region: @escaping Region, mimus: @escaping Region) -> Region {
-    return { point in region(point) && (!mimus(point)) }
+    return intersection(region1: region, region2: invert(region: mimus))
 }
 
 let circle2 = shift(region: circle(radius: 5), offset: Position(x: 5, y: 5))
@@ -173,7 +173,8 @@ struct Region1 {
     let lookup: (Position) -> Bool
 }
 extension Region1 {
-    func shift(offset: Position) -> Region1 { return Region1(lookup: { point in self.lookup(point.plus(tagert: offset)) }) }
+    init(_ radius: Distance) { self.init { $0.length() <= radius } }
+    func shift(offset: Position) -> Region1 { return Region1(lookup: { point in self.lookup(point.minus(tagert: offset)) }) }
     
     func invert() -> Region1 { return Region1(lookup: { point in !self.lookup(point) }) }
     
@@ -187,8 +188,8 @@ extension Region1 {
 func circle3(radius: Distance) -> Region1 { return Region1(lookup: { point in point.length() <= radius }) }
 
 extension Ship {
-    func enageRegion1() -> Region1 { return circle3(radius: firingRange) }
-    func unsafeRegion1() -> Region1 { return circle3(radius: unsafeRange) }
+    func enageRegion1() -> Region1 { return Region1(firingRange).shift(offset: position) }
+    func unsafeRegion1() -> Region1 { return Region1(unsafeRange).shift(offset: position) }
     func safelyEnageReion1() -> Region1 { return enageRegion1().difference(other: unsafeRegion1()) }
     
     func allEnageRegion1(friends: Ship ...) -> Region1 { return friends.reduce(enageRegion1(), { (region, friend) in region.union(other: friend.enageRegion1()) }) }
